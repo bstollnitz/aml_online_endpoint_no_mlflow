@@ -1,0 +1,10 @@
+channels:
+  - anaconda
+  - pytorch
+  - conda-forge
+dependencies:
+  - python==3.10.4
+  - pytorch==1.11.0
+  - pip
+  - pip:
+      - azureml-defaults
