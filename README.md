@@ -52,7 +52,7 @@ cd aml_online_endpoint
 Create the model resource on Azure ML.
 
 ```
-az ml model create --path model/ --name model-online --version 1 --type mlflow_model
+az ml model create --path model/ --name model-online --version 1
 ```
 
 Create the endpoint.
