@@ -1,9 +1,10 @@
+name: aml-online-endpoint
 channels:
   - anaconda
   - pytorch
   - conda-forge
 dependencies:
-  - python==3.10.4
+  - python==3.9.10
   - pytorch==1.11.0
   - pip
   - pip:
