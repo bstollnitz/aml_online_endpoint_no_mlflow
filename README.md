@@ -52,7 +52,7 @@ cd aml_online_endpoint
 Create the model resource on Azure ML.
 
 ```
-az ml model create --path model/ --name model-online --version 1
+az ml model create --path model/weights.pth --name model-online --version 1
 ```
 
 Create the endpoint.
