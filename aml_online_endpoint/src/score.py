@@ -56,7 +56,7 @@ def init():
 def run(raw_data):
     logging.info('Run started')
 
-    x = json.loads(raw_data)['data']
+    x = json.loads(raw_data)['input-data']
     x = np.array(x).reshape((1, 1, 28, 28))
     x = torch.from_numpy(x).float().to(device)
 
