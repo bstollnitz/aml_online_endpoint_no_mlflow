@@ -2,7 +2,6 @@
 
 import argparse
 import logging
-import shutil
 from pathlib import Path
 from typing import Tuple
 
@@ -49,7 +48,7 @@ def save_model(model_dir, model: nn.Module) -> None:
     """
     logging.info("Saving model to %s", model_dir)
     Path(model_dir).mkdir(parents=True, exist_ok=True)
-    torch.save(model.state_dict(), Path(model_dir, "model.pth"))
+    torch.save(model.state_dict(), Path(model_dir, "weights.pth"))
 
 
 def train(data_dir: str, model_dir: str, device: str) -> None:
