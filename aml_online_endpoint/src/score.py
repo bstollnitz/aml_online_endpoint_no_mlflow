@@ -47,7 +47,7 @@ def run(raw_data):
         for predicted_index in predicted_indices
     ]
 
-    logging.info("Predicted name: %s", predictions)
+    logging.info("Predictions: %s", predictions)
 
     logging.info("Run completed")
     return predictions
