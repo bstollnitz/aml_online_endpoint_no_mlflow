@@ -4,66 +4,77 @@ import json
 import logging
 import os
 
-import numpy as np
 import torch
-from torch import Tensor, nn
+from torch.utils.data import DataLoader, TensorDataset
+from torchvision.datasets import FashionMNIST
 
 from neural_network import NeuralNetwork
-
-labels_map = {
-    0: 'T-Shirt',
-    1: 'Trouser',
-    2: 'Pullover',
-    3: 'Dress',
-    4: 'Coat',
-    5: 'Sandal',
-    6: 'Shirt',
-    7: 'Sneaker',
-    8: 'Bag',
-    9: 'Ankle Boot',
-}
+from utils_score_nn import predict
 
 model = None
 device = None
-
-
-def predict(trained_model: nn.Module, x: Tensor) -> torch.Tensor:
-    with torch.no_grad():
-        y_prime = trained_model(x)
-        probabilities = nn.functional.softmax(y_prime, dim=1)
-        predicted_indices = probabilities.argmax(1)
-    return predicted_indices
+BATCH_SIZE = 64
 
 
 def init():
-    logging.info('Init started')
+    logging.info("Init started")
 
     global model
     global device
 
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    logging.info('Device: %s', device)
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    logging.info("Device: %s", device)
 
-    model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'weights.pth')
+    model_path = os.path.join(os.getenv("AZUREML_MODEL_DIR"),
+                              "model/weights.pth")
 
     model = NeuralNetwork().to(device)
     model.load_state_dict(torch.load(model_path, map_location=device))
-    model.eval()
 
-    logging.info('Init completed')
+    logging.info("Init completed")
 
 
 def run(raw_data):
-    logging.info('Run started')
+    logging.info("Run started")
 
-    x = json.loads(raw_data)['input_data']
-    x = np.array(x).reshape((1, 1, 28, 28))
-    x = torch.from_numpy(x).float().to(device)
+    json_list = json.loads(raw_data)["input_data"]["data"]
+    x = DataLoader(TensorDataset(torch.Tensor(json_list)),
+                   batch_size=BATCH_SIZE)
 
-    predicted_index = predict(model, x).item()
-    predicted_name = labels_map[predicted_index]
+    predicted_indices = predict(device, x, model)
+    predictions = [
+        FashionMNIST.classes[predicted_index]
+        for predicted_index in predicted_indices
+    ]
 
-    logging.info('Predicted name: %s', predicted_name)
+    logging.info("Predicted name: %s", predictions)
 
-    logging.info('Run completed')
-    return predicted_name
+    logging.info("Run completed")
+    return predictions
+
+
+# def main():
+#     with open("aml_online_endpoint/test_data/images_azureml.json",
+#               encoding="utf-8") as f:
+#         json_contents = json.load(f)
+
+#     json_list = json_contents["input_data"]["data"]
+#     torch_tensor = torch.Tensor(json_list)
+#     tensor_dataset = TensorDataset(torch_tensor)
+#     data = DataLoader(tensor_dataset, batch_size=64)
+
+#     device = "cuda" if torch.cuda.is_available() else "cpu"
+#     model = NeuralNetwork().to(device)
+#     model.load_state_dict(
+#         torch.load("aml_online_endpoint/model/weights.pth",
+#                    map_location=device))
+
+#     predicted_indices = predict(device, data, model)
+#     predictions = [
+#         FashionMNIST.classes[predicted_index]
+#         for predicted_index in predicted_indices
+#     ]
+#     print(predictions)
+
+# if __name__ == "__main__":
+#     main()
