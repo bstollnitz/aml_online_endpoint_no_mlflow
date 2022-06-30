@@ -51,30 +51,3 @@ def run(raw_data):
 
     logging.info("Run completed")
     return predictions
-
-
-# def main():
-#     with open("aml_online_endpoint/test_data/images_azureml.json",
-#               encoding="utf-8") as f:
-#         json_contents = json.load(f)
-
-#     json_list = json_contents["input_data"]["data"]
-#     torch_tensor = torch.Tensor(json_list)
-#     tensor_dataset = TensorDataset(torch_tensor)
-#     data = DataLoader(tensor_dataset, batch_size=64)
-
-#     device = "cuda" if torch.cuda.is_available() else "cpu"
-#     model = NeuralNetwork().to(device)
-#     model.load_state_dict(
-#         torch.load("aml_online_endpoint/model/weights.pth",
-#                    map_location=device))
-
-#     predicted_indices = predict(device, data, model)
-#     predictions = [
-#         FashionMNIST.classes[predicted_index]
-#         for predicted_index in predicted_indices
-#     ]
-#     print(predictions)
-
-# if __name__ == "__main__":
-#     main()
