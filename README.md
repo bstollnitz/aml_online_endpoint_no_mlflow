@@ -34,7 +34,7 @@ conda env create -f environment.yml
 Activate conda environment:
 
 ```
-conda activate aml_online_endpoint
+conda activate aml_online_endpoint_no_mlflow
 ```
 
 
@@ -46,13 +46,13 @@ Open the `src/train.py` file and press F5. A `model` folder is created with the 
 # Deploy in the cloud
 
 ```
-cd aml_online_endpoint
+cd aml_online_endpoint_no_mlflow
 ```
 
 Create the model resource on Azure ML.
 
 ```
-az ml model create --path model --name model-online --version 1
+az ml model create --path model --name model-online-no-mlflow --version 1
 ```
 
 Create the endpoint.
@@ -65,11 +65,11 @@ az ml online-deployment create -f cloud/deployment.yml --all-traffic
 Invoke the endpoint.
 
 ```
-az ml online-endpoint invoke --name endpoint-online --request-file test_data/images_azureml.json
+az ml online-endpoint invoke --name endpoint-online-no-mlflow --request-file test_data/images_azureml.json
 ```
 
-Cleanup the endpoint, to avoid getting charged.
+Clean up the endpoint, to avoid getting charged.
 
 ```
-az ml online-endpoint delete --name endpoint-online
+az ml online-endpoint delete --name endpoint-online-no-mlflow -y
 ```

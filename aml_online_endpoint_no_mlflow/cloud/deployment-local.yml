@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: blue
-endpoint_name: endpoint-online
+endpoint_name: endpoint-online-no-mlflow
 model:
   path: ../model
 code_configuration:

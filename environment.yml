@@ -1,4 +1,4 @@
-name: aml_online_endpoint
+name: aml_online_endpoint_no_mlflow
 channels:
   - anaconda
   - pytorch
