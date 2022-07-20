@@ -38,12 +38,44 @@ conda activate aml_online_endpoint_no_mlflow
 ```
 
 
-# Train locally
+## Train locally
 
 Open the `src/train.py` file and press F5. A `model` folder is created with the trained model.
 
 
-# Deploy in the cloud
+## Deploy locally
+
+```
+cd aml_online_endpoint_no_mlflow
+```
+
+You can deploy locally to test your endpoint before you deploy in the cloud. First start Docker. Then create the local endpoint and deployment.
+
+```
+az ml online-endpoint create -f cloud/endpoint.yml --local
+az ml online-deployment create -f cloud/deployment-local.yml --local
+```
+
+Verify your endpoint was created:
+
+```
+az ml online-endpoint list --local
+```
+
+Invoke the endpoint:
+
+```
+az ml online-endpoint invoke --name endpoint-online-no-mlflow --request-file test_data/images_azureml.json --local
+```
+
+Once you're done, you can delete the endpoint:
+
+```
+az ml online-endpoint delete -n endpoint-online-no-mlflow -y --local
+```
+
+
+## Deploy in the cloud
 
 ```
 cd aml_online_endpoint_no_mlflow
