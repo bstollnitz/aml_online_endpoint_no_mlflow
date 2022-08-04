@@ -38,12 +38,12 @@ conda activate aml_online_endpoint_no_mlflow
 ```
 
 
-## Train locally
+## Training on your development machine
 
 Open the `src/train.py` file and press F5. A `model` folder is created with the trained model.
 
 
-## Deploy locally
+## Inference on your development machine
 
 ```
 cd aml_online_endpoint_no_mlflow
@@ -75,7 +75,7 @@ az ml online-endpoint delete -n endpoint-online-no-mlflow -y --local
 ```
 
 
-## Deploy in the cloud
+## Deploying in the cloud using Azure ML
 
 ```
 cd aml_online_endpoint_no_mlflow
