@@ -1,11 +1,13 @@
 """Utilities that help with scoring neural networks."""
 
+from typing import List
+
 import torch
 from torch.utils.data import DataLoader
 
 
 def predict(device: str, dataloader: DataLoader,
-            model: torch.nn.Module) -> None:
+            model: torch.nn.Module) -> List:
     """
     Makes a prediction for the whole dataset once.
     """
