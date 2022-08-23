@@ -1,6 +1,12 @@
 # How to deploy using a managed online endpoint
 
-This project shows how to train a Fashion MNIST model locally, and how to deploy it using an online managed endpoint. 
+This project shows how to train a Fashion MNIST model locally, and how to deploy it using an online managed endpoint, without using MLflow. 
+
+
+## Blog post
+
+To learn more about the code in this repo, check out the accompanying blog post: https://bea.stollnitz.com/blog/aml-online-endpoint-no-mlflow/
+
 
 ## Azure setup
 
@@ -105,3 +111,8 @@ Clean up the endpoint, to avoid getting charged.
 ```
 az ml online-endpoint delete --name endpoint-online-no-mlflow -y
 ```
+
+## Related resources
+
+* [Local endpoints](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-managed-online-endpoints#deploy-and-debug-locally-by-using-local-endpoints?WT.mc_id=aiml-69969-bstollnitz)
+* [Deploy using managed online endpoints](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-managed-online-endpoints?WT.mc_id=aiml-69969-bstollnitz)
