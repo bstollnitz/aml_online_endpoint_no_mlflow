@@ -8,8 +8,8 @@ import torch
 from torch.utils.data import DataLoader, TensorDataset
 from torchvision.datasets import FashionMNIST
 
-from .neural_network import NeuralNetwork
-from .utils_score_nn import predict
+from neural_network import NeuralNetwork
+from utils_score_nn import predict
 
 model = None
 device = None
