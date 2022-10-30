@@ -36,6 +36,8 @@ Under "Run and Debug" on VS Code's left navigation, choose the "Train locally" r
 
 ## Inference on your development machine
 
+If you're not running this project on GitHub Codespaces, you can use a local endpoint to test deployment on your development machine:
+
 ```
 cd aml_online_endpoint_no_mlflow
 ```
@@ -64,6 +66,8 @@ Once you're done, you can delete the endpoint:
 ```
 az ml online-endpoint delete -n endpoint-online-no-mlflow -y --local
 ```
+
+If you're running this project on GitHub Codespaces, you can select the "Test locally" run configuration and press F5 to test your model on your development machine.
 
 
 ## Deploying in the cloud using Azure ML

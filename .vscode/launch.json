@@ -13,6 +13,14 @@
       "justMyCode": true
     },
     {
+      "name": "Test locally",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/aml_online_endpoint_no_mlflow/src/score_local.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
       "name": "Generate test data",
       "type": "python",
       "request": "launch",
